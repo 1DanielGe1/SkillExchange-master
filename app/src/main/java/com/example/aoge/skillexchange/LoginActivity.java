@@ -55,6 +55,7 @@ public class LoginActivity extends CheckPermissionsActivity {
         inputPassword = findViewById(R.id.password);
         loginButton = findViewById(R.id.btnLogin);
 //        System.out.println(this.getFilesDir());
+        getLocation();
 
     }
 
@@ -206,7 +207,7 @@ public class LoginActivity extends CheckPermissionsActivity {
         return tag;
     }
 
-    public void getLocation(View view){
+    public void getLocation(){
         new Thread(new Runnable() {
             @Override
             public void run() {

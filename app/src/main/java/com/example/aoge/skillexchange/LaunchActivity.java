@@ -92,50 +92,83 @@ public class LaunchActivity extends BaseActivity {
         }
     }
     public void listhistory(Context context){
-        File file = new File(context.getFilesDir()+"/history");
 
-//        FileReader reader;
-//
-//        File file = new File(talkto);
+        File dir = new File(UserInformation.ph+"history.txt");
+        FileReader reader;
+        try {
+            if(dir.exists()) {
+                reader = new FileReader(UserInformation.ph+"history.txt");
+                BufferedReader breader = new BufferedReader(reader);
 
-        FileInputStream in = null;
-        BufferedReader reader = null;
-        StringBuilder content = new StringBuilder();
-        try{
-            if(!file.exists()){
-                file.createNewFile();
-            }else {
-
-
-                in = openFileInput(context.getFilesDir()+"/history.txt");//文件名
-
-                reader = new BufferedReader(new InputStreamReader(in));
                 String line = "";
                 String[] sp = null;
 
-                while ((line = reader.readLine()) != null) {
+                while ((line = breader.readLine()) != null) {
                     sp = line.split(",,,,");
                     Map<String, Object> map = new HashMap<String, Object>();
-                    map.put("username",sp[0]);
-                    map.put("talkto",sp[1]);
-                    map.put("image",sp[2]);
-                    map.put("content",sp[3]);
-                    map.put("time",sp[4]);
+                    map.put("talkto",sp[0]);
+                    map.put("image",sp[1]);
+                    map.put("content",sp[2]);
+                    map.put("time",sp[3]);
+                    map.put("username",sp[4]);
                     UserInformation.historyList.add(map);
                 }
+                breader.close();
+
+
+            }else{
+
+                dir.createNewFile();
+
+                listhistory(LaunchActivity.this);
+
+                Intent intent = new Intent(context, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
 
-        }catch (IOException e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            if (reader !=null){
-                try{
-                    reader.close();
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
-            }
         }
+
+
+//        File file = new File("history");
+//        FileInputStream in = null;
+//        BufferedReader reader = null;
+//        StringBuilder content = new StringBuilder();
+//        try{
+//            if(!file.exists()){
+//
+//            }else {
+//                in = openFileInput("history");//文件名
+//
+//                reader = new BufferedReader(new InputStreamReader(in));
+//                String line = "";
+//                String[] sp = null;
+//
+//                while ((line = reader.readLine()) != null) {
+//                    sp = line.split(",,,,");
+//                    Map<String, Object> map = new HashMap<String, Object>();
+//                    map.put("username",sp[0]);
+//                    map.put("talkto",sp[1]);
+//                    map.put("image",sp[2]);
+//                    map.put("content",sp[3]);
+//                    map.put("time",sp[4]);
+//                    UserInformation.historyList.add(map);
+//                }
+//            }
+//
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }finally {
+//            if (reader !=null){
+//                try{
+//                    reader.close();
+//                }catch (IOException e){
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
 
 
     }

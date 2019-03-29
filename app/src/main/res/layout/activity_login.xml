@@ -37,7 +37,6 @@
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="getLocation"
                 android:hint="Enter Email"
                 android:inputType="textEmailAddress"
                 android:textColorHint="@color/colorPrimarySme" />

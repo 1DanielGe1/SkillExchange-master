@@ -162,8 +162,6 @@ public class MsgActivity extends BaseActivity {
 //        File file = new File(path);
 
 
-        String j = talkto.replace("@","").replace(".","");
-        System.out.println(UserInformation.ph+talkto.replace("@","").replace(".","")+".txt");
           File file = new File(UserInformation.ph+talkto.replace("@",""));
 
 //        FileReader reader;
@@ -386,40 +384,79 @@ public class MsgActivity extends BaseActivity {
             map.put("image",image);
             map.put("content",str[0]);
             map.put("time",str[1]);
-            UserInformation.historyList.add(0,map);
+            UserInformation.historyList.add(map);
         }
-        UserInformation.adapter.notifyDataSetChanged(); // 当有新消息时，刷新ListView中的显示
+//        UserInformation.adapter.notifyDataSetChanged(); // 当有新消息时，刷新ListView中的显示
+
+
+
+//        FileOutputStream outt = null;
+//        BufferedWriter writer = null;
+//
+//        File file = new File("history");
+//        String p= file.getAbsolutePath();
+//        if(file.exists()){
+//            file.delete();
+//        }
+//        try{
+//            outt = openFileOutput("history", Context.);
+//            writer = new BufferedWriter(new OutputStreamWriter(outt));
+//
+//            String all="";
+//            for(int i=0;i<UserInformation.historyList.size();i++){
+//                all = UserInformation.historyList.get(i).get("talkto")+",,,,"+UserInformation.historyList.get(i).get("image")+",,,,"+UserInformation.historyList.get(i).get("content")+",,,,"+UserInformation.historyList.get(i).get("time")+",,,,"+UserInformation.historyList.get(i).get("username");
+//
+//                writer.write(all);
+//                writer.newLine();
+//            }
+//        }catch (IOException e){
+//            e.printStackTrace();
+//        }finally {
+//            try{
+//                if (writer !=null){
+//                    writer.close();
+//                }
+//            }catch (IOException e){
+//                e.printStackTrace();
+//            }
+//        }
+
+
+        File file = new File(UserInformation.ph+"history.txt");
+        if(file.exists()){
+            file.delete();
+        }else{
+            try{
+            FileOutputStream fos=new FileOutputStream(file);
+            OutputStreamWriter osw=new OutputStreamWriter(fos, "UTF-8");
+            BufferedWriter  bw=new BufferedWriter(osw);
+            String all="";
+            for(int i=0;i<UserInformation.historyList.size();i++){
+                all = UserInformation.historyList.get(i).get("talkto")+",,,,"+UserInformation.historyList.get(i).get("image")+",,,,"+UserInformation.historyList.get(i).get("content")+",,,,"+UserInformation.historyList.get(i).get("time")+",,,,"+UserInformation.historyList.get(i).get("username");
+
+                bw.write(all);
+                bw.newLine();
+            }
+
+                bw.close();
+                osw.close();
+                fos.close();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
+        }
+
+
 
 
 
         FileOutputStream outt = null;
         BufferedWriter writer = null;
-        try{
-            outt = openFileOutput("history", Context.MODE_PRIVATE);
-            writer = new BufferedWriter(new OutputStreamWriter(outt));
-
-            String all="";
-            for(int i=0;i<UserInformation.historyList.size();i++){
-                all = UserInformation.historyList.get(i).get("talkto")+",,,,"+UserInformation.historyList.get(i).get("image")+",,,,"+UserInformation.historyList.get(i).get("content")+",,,,"+UserInformation.historyList.get(i).get("time")+",,,,"+UserInformation.historyList.get(i).get("username");
-
-                writer.write(all);
-                writer.newLine();
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }finally {
-            try{
-                if (writer !=null){
-                    writer.close();
-                }
-            }catch (IOException e){
-                e.printStackTrace();
-            }
+        file = new File(talkto.replace("@","").replace(".",""));
+        if(file.exists()){
+            file.delete();
         }
-
-
-        outt = null;
-        writer = null;
         try{
             outt = openFileOutput(talkto.replace("@","").replace(".",""), Context.MODE_PRIVATE);
             writer = new BufferedWriter(new OutputStreamWriter(outt));
