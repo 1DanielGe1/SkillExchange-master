@@ -46,9 +46,6 @@ public class LaunchActivity extends BaseActivity {
     }
 
     public void readFromFile(Context context) {
-//        Toast.makeText(getApplicationContext(),
-//                "jkhjh", Toast.LENGTH_LONG)
-//                .show();
         String path = context.getFilesDir()+"/userinfo.txt";
         UserInformation.ph = context.getFilesDir()+"/";
         File dir = new File(path);
