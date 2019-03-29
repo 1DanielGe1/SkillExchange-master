@@ -1,86 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.aoge.skillexchange.MeActivity">
 
-
-    <ImageView
-        android:id="@+id/imv_me_background"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="229dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:scaleType="fitXY"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_height="wrap_content">
 
-    <com.example.aoge.skillexchange.CircleImageButton
-        android:id="@+id/img_p_headportrait"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        <ImageView
+            android:id="@+id/imv_me_background"
+            android:layout_width="match_parent"
+            android:layout_height="229dp"
+            android:layout_marginBottom="8dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
-        android:scaleType="centerCrop"
+        <com.example.aoge.skillexchange.CircleImageButton
+            android:id="@+id/img_p_headportrait"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.384" />
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="188dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imv_me_background" />
 
-    <TextView
-        android:id="@+id/txt_p_username"
-        android:layout_width="wrap_content"
-        android:layout_height="33dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="casual"
-        android:textColor="@color/colorAccent"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/imv_d_gender"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="48dp"
+            app:layout_constraintStart_toEndOf="@+id/img_p_headportrait"
+            app:layout_constraintTop_toTopOf="@+id/img_p_headportrait"
+            app:srcCompat="@drawable/man" />
 
+        <TextView
+            android:id="@+id/txt_p_username"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:fontFamily="casual"
+            android:text="DanielGe"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_p_headportrait" />
+
+        <ImageButton
+            android:id="@+id/imb_logout"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
     <TextView
         android:id="@+id/txt_p_email"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="12dp"
         android:fontFamily="casual"
         android:text="Email:"
         android:textColor="@color/colorAccent"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.121"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.588" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/txt_p_email_show"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="66dp"
         android:fontFamily="casual"
         android:textColor="@color/colorAccent"
         android:textSize="20sp"
@@ -90,16 +109,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.588" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
     <TextView
         android:id="@+id/txt_p_location"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:fontFamily="casual"
+        android:layout_marginLeft="12dp"
         android:text="Location:"
         android:textColor="@color/colorAccent"
         android:textSize="20sp"
@@ -114,10 +136,7 @@
         android:id="@+id/txt_p_location_show"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="42dp"
         android:fontFamily="casual"
         android:textColor="@color/colorAccent"
         android:textSize="20sp"
@@ -127,17 +146,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.681" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
     <TextView
         android:id="@+id/txt_p_can"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:fontFamily="casual"
         android:text="I can:"
+        android:layout_marginLeft="12dp"
         android:textColor="@color/colorAccent"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -151,10 +173,7 @@
         android:id="@+id/txt_p_can_show"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="76dp"
         android:fontFamily="casual"
         android:textColor="@color/colorAccent"
         android:textSize="20sp"
@@ -164,17 +183,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.777" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
     <TextView
         android:id="@+id/txt_p_want"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:fontFamily="casual"
         android:text="I want:"
+        android:layout_marginLeft="12dp"
         android:textColor="@color/colorAccent"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -188,10 +210,7 @@
         android:id="@+id/txt_p_want_show"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="60dp"
         android:fontFamily="casual"
         android:textColor="@color/colorAccent"
         android:textSize="20sp"
@@ -201,16 +220,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.872" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_p_edit"
         android:layout_width="200dp"
         android:layout_height="37dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+
+        android:layout_marginTop="30dp"
         android:background="@drawable/editbutton"
+        android:layout_gravity="center_horizontal"
         android:text="Edit"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -219,23 +238,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.984" />
+    </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/imb_logout"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@null"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

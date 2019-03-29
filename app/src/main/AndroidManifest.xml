@@ -60,7 +60,6 @@
         <activity android:name=".FirstLoginActivity" >
 
         </activity>
-        <activity android:name=".OthersIfoActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".MsgActivity" >
 

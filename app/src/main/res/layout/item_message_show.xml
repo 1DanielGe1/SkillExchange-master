@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:divider="@drawable/divider"
-    android:showDividers="end"
-    android:padding="1dp">
+    android:showDividers="end">
 
         <LinearLayout
             android:orientation="horizontal"
