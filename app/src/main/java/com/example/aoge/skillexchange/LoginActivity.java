@@ -38,7 +38,7 @@ public class LoginActivity extends CheckPermissionsActivity {
     private EditText inputEmail, inputPassword;
     private Button loginButton;
     private UserInformation userinformation;
-    private String location;
+    private String location="";
     AMapLocationClient mLocationClient = null;
     //声明AMapLocationClientOption对象
     public AMapLocationClientOption mLocationOption = null;
@@ -53,9 +53,16 @@ public class LoginActivity extends CheckPermissionsActivity {
         userinformation = new UserInformation();
         inputEmail = findViewById(R.id.email);
         inputPassword = findViewById(R.id.password);
+        inputPassword.setOnClickListener(new View.OnClickListener() {
+                                             @Override
+                                             public void onClick(View v) {
+                                                 getLocation();
+                                             }
+        });
+
+
         loginButton = findViewById(R.id.btnLogin);
 //        System.out.println(this.getFilesDir());
-        getLocation();
 
     }
 
@@ -83,6 +90,11 @@ public class LoginActivity extends CheckPermissionsActivity {
             Toast.makeText(getApplicationContext(),
                     "Sorry, this App can't work if you don't allow the required permission.", Toast.LENGTH_LONG)
                     .show();
+        }else if(location.equals("")) {
+            Toast.makeText(getApplicationContext(),
+                    "Can't get your location, please click this button later.", Toast.LENGTH_LONG)
+                    .show();
+            getLocation();
         }else{
             // Avoid multiple clicks on the button
             loginButton.setClickable(false);

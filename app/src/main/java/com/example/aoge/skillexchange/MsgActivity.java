@@ -119,7 +119,6 @@ public class MsgActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 //
-
                 String content = inputText.getText().toString();
                 if (!"".equals(content)) {
                     if (socket.isConnected()) {//如果服务器连接
@@ -138,52 +137,23 @@ public class MsgActivity extends BaseActivity {
             }
         });
 
-
-//        btn_send.setOnClickListener(new Button.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                String msg = ed_msg.getText().toString();
-//                if (socket.isConnected()) {//如果服务器连接
-//                    if (!socket.isOutputShutdown()) {//如果输出流没有断开
-//                        new Thread(runnableout).start();
-//
-//                    }
-//                }
-//            }
-//        });
-//        SaveToFile();l
         new Thread(runnable).start();
 
     }
 
     private void initMsgs() {
-//        String path = MsgActivity.this.getFilesDir()+"/1.txt";
-//        File file = new File(path);
 
+        File file = new File(UserInformation.ph+talkto.replace("@",""));
 
-          File file = new File(UserInformation.ph+talkto.replace("@",""));
-
-//        FileReader reader;
-//
-//        File file = new File(talkto);
 
         FileInputStream in = null;
         BufferedReader reader = null;
         StringBuilder content = new StringBuilder();
         try{
-
             if(!file.exists()){
-
-
                 file.createNewFile();
-
-
-
             }else {
-
-                in = openFileInput(talkto.replace("@","").replace(".",""));//文件名
-
+                in = openFileInput(talkto.replace("@","").replace(".",""));//file name
                 reader = new BufferedReader(new InputStreamReader(in));
                 String line = "";
                 String[] sp = null;
@@ -292,7 +262,7 @@ public class MsgActivity extends BaseActivity {
 
 
 
-    //    接收线程发送过来信息，并用TextView追加显示
+    //   get the message from thread
     public Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -300,7 +270,7 @@ public class MsgActivity extends BaseActivity {
 //            System.out.println(msg.obj);
             String m = (String)msg.obj;
             String[]str = m.split(",,,,,");
-            if(str[1].equals(UserInformation.userinformation)){
+            if(str[0].equals(UserInformation.userinformation)){
                 Toast.makeText(getApplicationContext(),
                         "The user is not online, message sent failed!", Toast.LENGTH_LONG)
                         .show();
@@ -309,23 +279,23 @@ public class MsgActivity extends BaseActivity {
                         String.valueOf(Calendar.getInstance().get(Calendar.MINUTE)),"Yes");
                 msgList.add(msgs);
                 Mark = str[2]+",,,,"+msgs.getTheTime();
-                adapter.notifyDataSetChanged(); // 当有新消息时，刷新ListView中的显示
-                msgListView.setSelection(msgList.size()); // 将ListView定位到最后一行
+                adapter.notifyDataSetChanged();
+                msgListView.setSelection(msgList.size());
             }
 
         }
     };
 
     /**
-     //     * 连接服务器
+     //     * connect to server
      //     */
     private void connection() {
         try {
-            socket = new Socket(HOST, PORT);//连接服务器
+            socket = new Socket(HOST, PORT);
             in = new BufferedReader(new InputStreamReader(socket
-                    .getInputStream()));//接收消息的流对象
+                    .getInputStream()));
             out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
-                    socket.getOutputStream())), true);//发送消息的流对象
+                    socket.getOutputStream())), true);
             String information = UserInformation.userinformation+",,,,,"+talkto+",,,,,"+"My first message.";
             out.println(information);
             System.out.println("Success");
