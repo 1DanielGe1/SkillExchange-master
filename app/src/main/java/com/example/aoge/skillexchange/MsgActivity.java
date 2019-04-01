@@ -166,8 +166,8 @@ public class MsgActivity extends BaseActivity {
                 out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
                         socket.getOutputStream())), true);
                 out.println(UserInformation.userinformation+",,,,,"+talkto+",,,,,"+inputText.getText().toString());
-                Mark = inputText.getText().toString()+",,,,"+String.valueOf(Calendar.getInstance().get(Calendar.HOUR_OF_DAY))+":"+
-                        String.valueOf(Calendar.getInstance().get(Calendar.MINUTE));
+                int dl = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+                Mark = inputText.getText().toString()+",,,,"+Calendar.getInstance().get(Calendar.HOUR_OF_DAY)+":"+Calendar.getInstance().get(Calendar.MINUTE);
                 inputText.setText("");
             } catch (IOException e) {
                 e.printStackTrace();
@@ -270,25 +270,6 @@ public class MsgActivity extends BaseActivity {
      */
     public void btnmsgBack(View view){
         SaveToFile();
-        finish();
-    }
-
-    /**
-     * click the back button of the device.
-     */
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            SaveToFile();
-            finish();
-        }
-        return false;
-    }
-
-    /**
-     * save the chat history to the device.
-     */
-    public void SaveToFile() {
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -301,6 +282,36 @@ public class MsgActivity extends BaseActivity {
                 }
             }
         }).start();
+        finish();
+    }
+
+    /**
+     * click the back button of the device.
+     */
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
+                                socket.getOutputStream())), true);
+                        out.println(UserInformation.userinformation+",,,,,"+talkto+",,,,,"+"exit");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+            SaveToFile();
+            finish();
+        }
+        return false;
+    }
+
+    /**
+     * save the chat history to the device.
+     */
+    public void SaveToFile() {
 
         String[]str = Mark.split(",,,,");
 
@@ -312,6 +323,7 @@ public class MsgActivity extends BaseActivity {
                 UserInformation.historyList.get(i).put("content",str[0]);
                 UserInformation.historyList.get(i).put("time",str[1]);
                 mk = 1;
+                UserInformation.adapter.notifyDataSetChanged();
             }
         }
 
@@ -328,27 +340,26 @@ public class MsgActivity extends BaseActivity {
         File file = new File(UserInformation.ph+"history.txt");
         if(file.exists()){
             file.delete();
-        }else{
-            try{
-            FileOutputStream fos=new FileOutputStream(file);
-            OutputStreamWriter osw=new OutputStreamWriter(fos, "UTF-8");
-            BufferedWriter  bw=new BufferedWriter(osw);
-            String all="";
-            for(int i=0;i<UserInformation.historyList.size();i++){
-                all = UserInformation.historyList.get(i).get("talkto")+",,,,"+UserInformation.historyList.get(i).get("image")+",,,,"+UserInformation.historyList.get(i).get("content")+",,,,"+UserInformation.historyList.get(i).get("time")+",,,,"+UserInformation.historyList.get(i).get("username");
-
-                bw.write(all);
-                bw.newLine();
-            }
-
-                bw.close();
-                osw.close();
-                fos.close();
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-
         }
+        try{
+        FileOutputStream fos=new FileOutputStream(file);
+        OutputStreamWriter osw=new OutputStreamWriter(fos, "UTF-8");
+        BufferedWriter  bw=new BufferedWriter(osw);
+        String all="";
+        for(int i=0;i<UserInformation.historyList.size();i++){
+            all = UserInformation.historyList.get(i).get("talkto")+",,,,"+UserInformation.historyList.get(i).get("image")+",,,,"+UserInformation.historyList.get(i).get("content")+",,,,"+UserInformation.historyList.get(i).get("time")+",,,,"+UserInformation.historyList.get(i).get("username");
+
+            bw.write(all);
+            bw.newLine();
+        }
+
+            bw.close();
+            osw.close();
+            fos.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
 
         FileOutputStream outt = null;
         BufferedWriter writer = null;
@@ -378,7 +389,5 @@ public class MsgActivity extends BaseActivity {
                 e.printStackTrace();
             }
         }
-
-
     }
 }

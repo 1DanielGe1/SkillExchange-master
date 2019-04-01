@@ -55,29 +55,24 @@ public class LaunchActivity extends BaseActivity {
                 reader = new FileReader(path);
                 BufferedReader breader = new BufferedReader(reader);
                 String line = breader.readLine();
-                if (line == null) {
+                if (line.equals(null)) {
                     Intent intent = new Intent(context, LoginActivity.class);
                     startActivity(intent);
                     breader.close();
 
-                    listhistory(LaunchActivity.this);
-
                     finish();
                 } else {
                     UserInformation.userinformation = line;
+                    listhistory(LaunchActivity.this);
                     Intent intent = new Intent(context, MainActivity.class);
                     startActivity(intent);
                     breader.close();
-
-                    listhistory(LaunchActivity.this);
 
                     finish();
                 }
             }else{
 
                 dir.createNewFile();
-
-                listhistory(LaunchActivity.this);
 
                 Intent intent = new Intent(context, LoginActivity.class);
                 startActivity(intent);
@@ -117,56 +112,10 @@ public class LaunchActivity extends BaseActivity {
 
                 dir.createNewFile();
 
-                listhistory(LaunchActivity.this);
-
-                Intent intent = new Intent(context, LoginActivity.class);
-                startActivity(intent);
-                finish();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-//        File file = new File("history");
-//        FileInputStream in = null;
-//        BufferedReader reader = null;
-//        StringBuilder content = new StringBuilder();
-//        try{
-//            if(!file.exists()){
-//
-//            }else {
-//                in = openFileInput("history");//文件名
-//
-//                reader = new BufferedReader(new InputStreamReader(in));
-//                String line = "";
-//                String[] sp = null;
-//
-//                while ((line = reader.readLine()) != null) {
-//                    sp = line.split(",,,,");
-//                    Map<String, Object> map = new HashMap<String, Object>();
-//                    map.put("username",sp[0]);
-//                    map.put("talkto",sp[1]);
-//                    map.put("image",sp[2]);
-//                    map.put("content",sp[3]);
-//                    map.put("time",sp[4]);
-//                    UserInformation.historyList.add(map);
-//                }
-//            }
-//
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }finally {
-//            if (reader !=null){
-//                try{
-//                    reader.close();
-//                }catch (IOException e){
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-
-
     }
 }
