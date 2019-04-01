@@ -162,11 +162,16 @@ public class MsgActivity extends BaseActivity {
     Runnable runnableout = new Runnable(){
         @Override
         public void run() {
-
-            out.println(UserInformation.userinformation+",,,,,"+talkto+",,,,,"+inputText.getText().toString());
-            Mark = inputText.getText().toString()+",,,,"+String.valueOf(Calendar.getInstance().get(Calendar.HOUR_OF_DAY))+":"+
-                    String.valueOf(Calendar.getInstance().get(Calendar.MINUTE));
-            inputText.setText(""); // 清空输入框中的内容
+            try {
+                out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
+                        socket.getOutputStream())), true);
+                out.println(UserInformation.userinformation+",,,,,"+talkto+",,,,,"+inputText.getText().toString());
+                Mark = inputText.getText().toString()+",,,,"+String.valueOf(Calendar.getInstance().get(Calendar.HOUR_OF_DAY))+":"+
+                        String.valueOf(Calendar.getInstance().get(Calendar.MINUTE));
+                inputText.setText("");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     };
 
@@ -283,6 +288,20 @@ public class MsgActivity extends BaseActivity {
      * save the chat history to the device.
      */
     public void SaveToFile() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
+                            socket.getOutputStream())), true);
+                    out.println(UserInformation.userinformation+",,,,,"+talkto+",,,,,"+"exit");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
         String[]str = Mark.split(",,,,");
 
         int mk=0;
